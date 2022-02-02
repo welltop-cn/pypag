@@ -1,4 +1,3 @@
-#include <iostream>
 #include <pybind11/pybind11.h>
 namespace py = pybind11;
 
@@ -15,8 +14,8 @@ namespace pypag {
         if (bufSize < surface->width() * surface->height() * 4) {
             throw py::buffer_error();
         }
-        std::cout << info.itemsize << ", " << info.ndim 
-            << ", " << info.shape[0] << ", " << bufSize << std::endl;
+//        std::cout << info.itemsize << ", " << info.ndim 
+//            << ", " << info.shape[0] << ", " << bufSize << std::endl;
         return surface->readPixels(colorType, alphaType, info.ptr, surface->width() * 4);
     }
 
