@@ -18,8 +18,7 @@ add_subdirectory(pybind11)
 
 set(PAG_PATH libpag)
 include_directories(${PAG_PATH}/include)
-file(GLOB PAG_LIBS ${PAG_PATH}/linux_out/libpag.a)
-list(APPEND PYPAG_STATIC_LIBS ${PAG_LIBS})
+file(GLOB PYPAG_STATIC_LIBS libs/${PLATFORM}/${ARCH}/*.a)
 file(GLOB PYPAG_SHARED_LIBS libs/${PLATFORM}/${ARCH}/*.so)
 
 message(STATUS "PYPAG_SHARED_LIBS=${PYPAG_SHARED_LIBS}")
