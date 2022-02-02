@@ -28,8 +28,8 @@ def write_bmp(width, height, data):
         f.write(data)
 
 
-f = pypag.PAGFile.load("../test2.pag")
-font = pypag.PAGFont.register_font("../NotoSerifSC-Regular.otf", 0)
+f = pypag.PAGFile.load("../sample/test2.pag")
+font = pypag.PAGFont.register_font("../sample/NotoSerifSC-Regular.otf", 0)
 textDocumentHandle = f.get_text_data(0)
 textDocumentHandle.font_family = font.font_family
 textDocumentHandle.font_style = font.font_style
