@@ -50,8 +50,10 @@ PYBIND11_MODULE(pypag, m) {
         .def("num_texts", &pag::PAGFile::numTexts)
         .def("get_text_data", &pag::PAGFile::getTextData)
         .def("replace_text", &pag::PAGFile::replaceText)
-        .def("width", &pag::PAGFile::width)
-        .def("height", &pag::PAGFile::height);
+        .def_property_readonly("width", &pag::PAGFile::width)
+        .def_property_readonly("height", &pag::PAGFile::height)
+        .def_property("duration", &pag::PAGFile::duration, &pag::PAGFile::setDuration)
+        .def_property_readonly("frame_rate", &pag::PAGFile::frameRate);
 
 
 
@@ -72,7 +74,8 @@ PYBIND11_MODULE(pypag, m) {
         .def_property("surface", &pag::PAGPlayer::getSurface, &pag::PAGPlayer::setSurface)
         .def_property("composition", &pag::PAGPlayer::getComposition, &pag::PAGPlayer::setComposition)
         .def_property("progress", &pag::PAGPlayer::getProgress, &pag::PAGPlayer::setProgress)
-        .def("flush", &pag::PAGPlayer::flush);
+        .def("flush", &pag::PAGPlayer::flush)
+        .def("next_frame", &pag::PAGPlayer::nextFrame);
     
 }
 

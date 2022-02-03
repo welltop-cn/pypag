@@ -29,19 +29,21 @@ def write_bmp(width, height, data):
 
 
 f = pypag.PAGFile.load("../sample/test2.pag")
+print(f"duration is {f.duration}, frame rate is {f.frame_rate}")
+
 font = pypag.PAGFont.register_font("../sample/NotoSerifSC-Regular.otf", 0)
 textDocumentHandle = f.get_text_data(0)
 textDocumentHandle.font_family = font.font_family
 textDocumentHandle.font_style = font.font_style
 f.replace_text(0, textDocumentHandle)
-surface = pypag.PAGSurface.make_offscreen(f.width(), f.height())
+surface = pypag.PAGSurface.make_offscreen(f.width, f.height)
 player = pypag.PAGPlayer()
 player.surface = surface
 player.composition = f
 player.progress = 0.9
 player.flush()
-buf = bytearray(f.width() * f.height() * 4)
+buf = bytearray(f.width * f.height * 4)
 surface.read_pixels(pypag.ColorType.BGRA_8888, pypag.AlphaType.Premultiplied, buf)
-write_bmp(f.width(), f.height(), buf)
+write_bmp(f.width, f.height, buf)
 
 
