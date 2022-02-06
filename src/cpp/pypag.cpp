@@ -2,6 +2,7 @@
 namespace py = pybind11;
 
 #include <pag/pag.h>
+#include "ffavc.h"
 
 namespace pypag {
     bool surfaceReadPixels(std::shared_ptr<pag::PAGSurface> surface, pag::ColorType colorType, pag::AlphaType alphaType, py::buffer buf) {

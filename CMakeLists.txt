@@ -18,6 +18,8 @@ add_subdirectory(pybind11)
 
 set(PAG_PATH libpag)
 include_directories(${PAG_PATH}/include)
+include_directories(${PAG_PATH}/vendor/ffavc/include)
+
 file(GLOB PYPAG_STATIC_LIBS libs/${PLATFORM}/${ARCH}/*.a)
 file(GLOB PYPAG_SHARED_LIBS libs/${PLATFORM}/${ARCH}/*.so)
 
