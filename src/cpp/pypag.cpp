@@ -20,6 +20,27 @@ namespace pypag {
         return surface->readPixels(colorType, alphaType, info.ptr, surface->width() * 4);
     }
 
+    std::shared_ptr<pag::PAGImage> PAGImageFromBytes(py::buffer buf) {
+        py::buffer_info info = buf.request();
+        if (info.ndim != 1) {
+            throw py::buffer_error();
+        }
+
+        int bufSize = info.itemsize * info.shape[0];
+        return pag::PAGImage::FromBytes(info.ptr, bufSize);
+    }
+
+    std::shared_ptr<pag::PAGImage> PAGImageFromPixels(py::buffer buf, int width, int height, pag::ColorType colorType, pag::AlphaType alphaType) {
+        py::buffer_info info = buf.request();
+        if (info.ndim != 1) {
+            throw py::buffer_error();
+        }
+
+        int bufSize = info.itemsize * info.shape[0];
+ 
+        return pag::PAGImage::FromPixels(info.ptr, width, height, width * 4, colorType, alphaType);
+    }
+
 PYBIND11_MODULE(pypag, m) {
     //enums
     
@@ -59,7 +80,11 @@ PYBIND11_MODULE(pypag, m) {
 
 
     py::class_<pag::PAGImage, std::shared_ptr<pag::PAGImage> >(m, "PAGImage")
-        .def_static("from_path", &pag::PAGImage::FromPath);
+        .def_static("from_path", &pag::PAGImage::FromPath)
+        .def_static("from_bytes", &PAGImageFromBytes)
+        .def_static("from_pixels", &PAGImageFromPixels)
+        .def_property_readonly("width", &pag::PAGImage::width)
+        .def_property_readonly("height", &pag::PAGImage::height);
 
     py::class_<pag::TextDocument, std::shared_ptr<pag::TextDocument> >(m, "TextDocument")
         .def_readwrite("text", &pag::TextDocument::text)

@@ -44,6 +44,13 @@ python ../sample/sample.py
 ## PAGImage
 ### static methods
 * from_path
+* from_bytes
+* from_pixels  
+    from_pixels(buffer, width, height, colorType, alphaType)
+### instance properties
+* width (readonly)
+* height (readonly)
+
 
 ## TextDocument
 ### instance methods
