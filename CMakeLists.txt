@@ -11,7 +11,7 @@ endif ()
 
 
 set(CMAKE_CXX_STANDARD 11 CACHE STRING "C++ version selection") 
-add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=1)
 
 find_package(Python COMPONENTS Interpreter Development REQUIRED)
 add_subdirectory(pybind11)
