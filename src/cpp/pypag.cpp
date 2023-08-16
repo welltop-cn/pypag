@@ -66,7 +66,7 @@ PYBIND11_MODULE(pypag, m) {
         .def_readonly("font_style", &pag::PAGFont::fontStyle);
 
     py::class_<pag::PAGFile, pag::PAGComposition, std::shared_ptr<pag::PAGFile> >(m, "PAGFile")
-        .def_static("load", static_cast<std::shared_ptr<pag::PAGFile> (*)(const std::string&)>(&(pag::PAGFile::Load)))
+        .def_static("load", static_cast<std::shared_ptr<pag::PAGFile> (*)(const std::string&, const std::string&)>(&(pag::PAGFile::Load)), py::arg("file_path"), py::arg("password") = "")
         .def("num_images", &pag::PAGFile::numImages)
         .def("replace_images", &pag::PAGFile::replaceImage)
         .def("num_texts", &pag::PAGFile::numTexts)
